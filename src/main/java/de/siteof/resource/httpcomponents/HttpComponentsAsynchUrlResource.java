@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
@@ -60,57 +59,6 @@ import de.siteof.task.SingleThreadTaskManager;
 import de.siteof.task.SynchronousTaskManager;
 
 public class HttpComponentsAsynchUrlResource extends AbstractResource {
-
-	public static class HttpClientResponseInputStream extends FilterInputStream {
-
-		private final HttpMethod method;
-
-		private static final Log log = LogFactory
-				.getLog(HttpComponentsAsynchUrlResource.class);
-
-		public HttpClientResponseInputStream(InputStream in, HttpMethod method) {
-			super(in);
-			this.method = method;
-		}
-
-		@Override
-		public int read() throws IOException {
-			int result = super.read();
-			return result;
-		}
-
-		@Override
-		public int read(byte[] buffer, int offset, int count)
-				throws IOException {
-			int result = super.read(buffer, offset, count);
-			return result;
-		}
-
-		@Override
-		public int read(byte[] buffer) throws IOException {
-			return this.read(buffer, 0, buffer.length);
-		}
-
-		@Override
-		public void close() throws IOException {
-			try {
-				super.close();
-			} catch (Exception e) {
-				log.debug("failed to close input stream - " + e, e);
-			}
-			try {
-				method.abort();
-			} catch (Exception e) {
-				log.debug("failed to abort connection - " + e, e);
-			}
-			try {
-				method.releaseConnection();
-			} catch (Exception e) {
-				log.debug("failed to release connection - " + e, e);
-			}
-		}
-
-	}
 
 	private static abstract class AbstractHttpRequestHandler implements HttpRequestExecutionHandler,
 			SessionRequestCallback, EventListener {
@@ -161,7 +109,7 @@ public class HttpComponentsAsynchUrlResource extends AbstractResource {
 		@Override
 		public void finalizeContext(HttpContext context) {
 		}
-		
+
 		protected abstract void saveSessionCookies(Header[] headers);
 
 		@Override
