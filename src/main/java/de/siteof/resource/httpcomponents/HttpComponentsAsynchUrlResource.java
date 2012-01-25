@@ -50,6 +50,7 @@ import org.apache.http.util.EntityUtils;
 
 import de.siteof.resource.AbstractResource;
 import de.siteof.resource.ICookieManager;
+import de.siteof.resource.ResourceRequestParameters;
 import de.siteof.resource.event.IResourceListener;
 import de.siteof.resource.event.ResourceLoaderEvent;
 import de.siteof.resource.util.ObjectHolder;
@@ -587,11 +588,6 @@ public class HttpComponentsAsynchUrlResource extends AbstractResource {
 		return 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.siteof.webpicturebrowser.loader.AbstractResource#abort()
-	 */
 	@Override
 	public void abort() {
 		// super.abort();
@@ -602,16 +598,10 @@ public class HttpComponentsAsynchUrlResource extends AbstractResource {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.siteof.webpicturebrowser.loader.AbstractResource#getResourceAsStream
-	 * (de.siteof.webpicturebrowser.loader.event.IResourceListener)
-	 */
 	@Override
 	public void getResourceAsStream(
-			IResourceListener<ResourceLoaderEvent<InputStream>> listener)
+			IResourceListener<ResourceLoaderEvent<InputStream>> listener,
+			ResourceRequestParameters parameters)
 			throws IOException {
 		// TODO Auto-generated method stub
 //		super.getResourceAsStream(listener);
@@ -796,16 +786,10 @@ public class HttpComponentsAsynchUrlResource extends AbstractResource {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.siteof.webpicturebrowser.loader.AbstractResource#getResourceBytes(
-	 * de.siteof.webpicturebrowser.loader.event.IResourceListener)
-	 */
 	@Override
 	public void getResourceBytes(
-			IResourceListener<ResourceLoaderEvent<byte[]>> listener)
+			IResourceListener<ResourceLoaderEvent<byte[]>> listener,
+			ResourceRequestParameters parameters)
 			throws IOException {
 		getResourceBytes(listener, this.getName());
 	}
