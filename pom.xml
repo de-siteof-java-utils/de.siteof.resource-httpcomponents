@@ -37,5 +37,12 @@
 			<artifactId>httpcore-nio</artifactId>
 			<version>4.1.4</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>de.siteof</groupId>
+			<artifactId>httpclient-test</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
